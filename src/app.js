@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 const axios = require('axios');
-const compression = require('compression'); // Add compression middleware
+const compression = require('compression'); 
 
 require('dotenv').config();
 
@@ -79,10 +79,17 @@ app.get('/', async (req, res) => {
     // Store in cache
     cache[url] = ModifiedData;
 
-    return res.json(ModifiedData);
+    return res.json({
+      data: ModifiedData,
+      status : 200
+    });
+
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({
+      error: 'Internal Server Error',
+      status : 500
+    });
   }
 });
 
